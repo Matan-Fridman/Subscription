@@ -1,0 +1,203 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "createProduct",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "getDuration",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "getMonthly",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "getSetupFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Semaphore/.git/objects/08/SemaphoreDailySub.sol": "IproductsContract"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@zk-kit/imt.sol/Constants.sol": {
+			"keccak256": "0x5c7288e71c0ba30198217b824c7899327a0718f769bb441ebf84d78194ea7dea",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://779a95196453ee58ec56447e0001d689c1ca8e748a0d435c91429d4076f1a197",
+				"dweb:/ipfs/QmWyuCzxShndqGcaXFr13sALM5nHztYN288ZK5uNAGzkUf"
+			]
+		},
+		"@zk-kit/imt.sol/internal/InternalLeanIMT.sol": {
+			"keccak256": "0x0e5cec0afefdc649ac6f0dffab31d85c1aaf9fcee6a34928be741c0a5f6fcc1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c4fd42e974389ee423c0d2d4cb81e2906ec9c784717b15a48f876c8cb68a4b50",
+				"dweb:/ipfs/QmWSjwLimspd9WdZAshuakaX4uWpdAjoKNqJCiq6HWJEKa"
+			]
+		},
+		"Semaphore/.git/objects/08/Constants.sol": {
+			"keccak256": "0xbc7a079fb099a3c36534e9516fb044c9427b9ee3ff89ca42d3d7d5de0799e565",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://026f0688c15930da0031cf7eaae9d91545ed13e3fc7db57e8628e8166dd9c020",
+				"dweb:/ipfs/Qmf29uz8PxfxZHRUykVE4P7GHH5Hw888cMZ9mR3kwT251S"
+			]
+		},
+		"Semaphore/.git/objects/08/ISemaphore.sol": {
+			"keccak256": "0x2f5ddb7f5c1deb3bf32338048bd2df052136774da756a2a67743dbf24aa2371a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ca2d36bcb5e3301642ef214cdd8db3360254c11e77ccaa1267dd566177e7038b",
+				"dweb:/ipfs/QmSvCNyM1mJfZevWFyDQxAvcE87JWF2Z2pz6ak27GRdgzQ"
+			]
+		},
+		"Semaphore/.git/objects/08/ISemaphoreGroups.sol": {
+			"keccak256": "0x0068c9db7a30c22a79d1be39b391f902298b7f782dfb561885e3ff61a1eb7d45",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4b167866fd6b6d577e95866cc0116525df9e82c7fa1d8a7b629542d9cb6a34ad",
+				"dweb:/ipfs/QmPMcCq1jBxAPnpAtnUMq4812njcLiohr2NMQGjGWwKVYr"
+			]
+		},
+		"Semaphore/.git/objects/08/ISemaphoreVerifier.sol": {
+			"keccak256": "0xbe8d0ee669c14b82ace2cc7ca6c4a3a618fdba7a480e1f505ede9cff2cfe869f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0f36a17f3d4cceab886672aafc2598d79da4362b19d9ae532631c2a638079a22",
+				"dweb:/ipfs/QmYuSzzQEXBDgk5f1zuYCdqegHYnmbjpra9qXQQkzrYDjP"
+			]
+		},
+		"Semaphore/.git/objects/08/Semaphore.sol": {
+			"keccak256": "0xb3f6154537754742420638dcad31b311053714b42a2ce4e679bac7d77afb505b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://43552855313850f6a7073f5af37b76d2ecb52819b9c84cca69477f0b19f89af2",
+				"dweb:/ipfs/QmY1BNhhJZcDU4AqoxsGcws3PeFs9VeMrCdnzhe8iyTv88"
+			]
+		},
+		"Semaphore/.git/objects/08/SemaphoreDailySub.sol": {
+			"keccak256": "0xba6dcaa3b0562a7d609af056c7eec2e72462a216eb10bcf9520b0643fd01872b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://17dca5e2edea5075997ab05dddf09dbc8576598ef57594d6b04d29c50d65f3bb",
+				"dweb:/ipfs/Qmb1EagRNGwcSf2dA2iNjpGNigy4jp3kMy71iLZjpRhR3g"
+			]
+		},
+		"Semaphore/.git/objects/08/SemaphoreGroups.sol": {
+			"keccak256": "0xe66b52181784c58bf1dd6954d64b931936f4088df1dd2f7b6204a253d2c4e399",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2c1de4e791372ebec5cf3002ae9a43903ae2f5bc08c141ba2a3ed1012d8922e3",
+				"dweb:/ipfs/QmbJtqAums1TKgT71QqE39wQKxuuq3KPpfHsRUqcGUwzb6"
+			]
+		},
+		"poseidon-solidity/PoseidonT3.sol": {
+			"keccak256": "0x0102caa303bbc6690508f3615604f7730789ed990058c9513a87ccb30e4835be",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1fe7291d5f998eaf7dfe37961b8a8e72f60cf79a7a34459efa5683ca3a702971",
+				"dweb:/ipfs/QmQExqgvNEPKLq15rNygqmthUnAPWgTm4m3Bb5BCExwHF1"
+			]
+		}
+	},
+	"version": 1
+}

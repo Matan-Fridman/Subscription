@@ -1,0 +1,508 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "LeafDoesNotExist",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__CallerIsNotTheGroupAdmin",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__CallerIsNotThePendingGroupAdmin",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__GroupDoesNotExist",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldAdmin",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newAdmin",
+						"type": "address"
+					}
+				],
+				"name": "GroupAdminPending",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldAdmin",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newAdmin",
+						"type": "address"
+					}
+				],
+				"name": "GroupAdminUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					}
+				],
+				"name": "GroupCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "identityCommitment",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "merkleTreeRoot",
+						"type": "uint256"
+					}
+				],
+				"name": "MemberAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "identityCommitment",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "merkleTreeRoot",
+						"type": "uint256"
+					}
+				],
+				"name": "MemberRemoved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "identityCommitment",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "newIdentityCommitment",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "merkleTreeRoot",
+						"type": "uint256"
+					}
+				],
+				"name": "MemberUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "startIndex",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "identityCommitments",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "merkleTreeRoot",
+						"type": "uint256"
+					}
+				],
+				"name": "MembersAdded",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					}
+				],
+				"name": "getGroupAdmin",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					}
+				],
+				"name": "getMerkleTreeDepth",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					}
+				],
+				"name": "getMerkleTreeRoot",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					}
+				],
+				"name": "getMerkleTreeSize",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "identityCommitment",
+						"type": "uint256"
+					}
+				],
+				"name": "hasMember",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "identityCommitment",
+						"type": "uint256"
+					}
+				],
+				"name": "indexOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "This contract allows you to create groups, add, remove and update members. You can use getters to obtain informations about groups (root, depth, number of leaves).",
+			"events": {
+				"GroupAdminPending(uint256,address,address)": {
+					"details": "Event emitted when a group admin is being updated.",
+					"params": {
+						"groupId": ": Id of the group.",
+						"newAdmin": ": New admin of the group.",
+						"oldAdmin": ": Old admin of the group."
+					}
+				},
+				"GroupAdminUpdated(uint256,address,address)": {
+					"details": "Event emitted when a new admin is assigned to a group.",
+					"params": {
+						"groupId": ": Id of the group.",
+						"newAdmin": ": New admin of the group.",
+						"oldAdmin": ": Old admin of the group."
+					}
+				},
+				"GroupCreated(uint256)": {
+					"details": "Event emitted when a new group is created.",
+					"params": {
+						"groupId": ": Id of the group."
+					}
+				},
+				"MemberAdded(uint256,uint256,uint256,uint256)": {
+					"details": "Event emitted when a new identity commitment is added.",
+					"params": {
+						"groupId": ": Group id of the group.",
+						"identityCommitment": ": New identity commitment.",
+						"index": ": Merkle tree leaf index.",
+						"merkleTreeRoot": ": New root hash of the tree."
+					}
+				},
+				"MemberRemoved(uint256,uint256,uint256,uint256)": {
+					"details": "Event emitted when a new identity commitment is removed.",
+					"params": {
+						"groupId": ": Group id of the group.",
+						"identityCommitment": ": Existing identity commitment to be removed.",
+						"index": ": Identity commitment index.",
+						"merkleTreeRoot": ": New root hash of the tree."
+					}
+				},
+				"MemberUpdated(uint256,uint256,uint256,uint256,uint256)": {
+					"details": "Event emitted when an identity commitment is updated.",
+					"params": {
+						"groupId": ": Group id of the group.",
+						"identityCommitment": ": Existing identity commitment to be updated.",
+						"index": ": Identity commitment index.",
+						"merkleTreeRoot": ": New root hash of the tree.",
+						"newIdentityCommitment": ": New identity commitment."
+					}
+				},
+				"MembersAdded(uint256,uint256,uint256[],uint256)": {
+					"details": "Event emitted when many identity commitments are added at the same time.",
+					"params": {
+						"groupId": ": Group id of the group.",
+						"identityCommitments": ": The new identity commitments.",
+						"merkleTreeRoot": ": New root hash of the tree.",
+						"startIndex": ": Index of the first element of the new identity commitments in the merkle tree."
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"getGroupAdmin(uint256)": {
+					"details": "See {ISemaphoreGroups-getGroupAdmin}."
+				},
+				"getMerkleTreeDepth(uint256)": {
+					"details": "See {ISemaphoreGroups-getMerkleTreeDepth}."
+				},
+				"getMerkleTreeRoot(uint256)": {
+					"details": "See {ISemaphoreGroups-getMerkleTreeRoot}."
+				},
+				"getMerkleTreeSize(uint256)": {
+					"details": "See {ISemaphoreGroups-getMerkleTreeSize}."
+				},
+				"hasMember(uint256,uint256)": {
+					"details": "See {ISemaphoreGroups-hasMember}."
+				},
+				"indexOf(uint256,uint256)": {
+					"details": "See {ISemaphoreGroups-indexOf}."
+				}
+			},
+			"stateVariables": {
+				"admins": {
+					"details": "Gets a group id and returns its admin. The admin can be an Ethereum account or a smart contract."
+				},
+				"merkleTrees": {
+					"details": "Gets a group id and returns its tree data. The tree is an Incremental Merkle Tree which is called Lean Incremental Merkle Tree."
+				},
+				"pendingAdmins": {
+					"details": "Gets a group id and returns any pending admin. The pending admin can be an Ethereum account or a smart contract."
+				}
+			},
+			"title": "Semaphore groups contract.",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Semaphore/.git/objects/08/SemaphoreGroups.sol": "SemaphoreGroups"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@zk-kit/imt.sol/Constants.sol": {
+			"keccak256": "0x5c7288e71c0ba30198217b824c7899327a0718f769bb441ebf84d78194ea7dea",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://779a95196453ee58ec56447e0001d689c1ca8e748a0d435c91429d4076f1a197",
+				"dweb:/ipfs/QmWyuCzxShndqGcaXFr13sALM5nHztYN288ZK5uNAGzkUf"
+			]
+		},
+		"@zk-kit/imt.sol/internal/InternalLeanIMT.sol": {
+			"keccak256": "0x0e5cec0afefdc649ac6f0dffab31d85c1aaf9fcee6a34928be741c0a5f6fcc1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c4fd42e974389ee423c0d2d4cb81e2906ec9c784717b15a48f876c8cb68a4b50",
+				"dweb:/ipfs/QmWSjwLimspd9WdZAshuakaX4uWpdAjoKNqJCiq6HWJEKa"
+			]
+		},
+		"Semaphore/.git/objects/08/ISemaphoreGroups.sol": {
+			"keccak256": "0x0068c9db7a30c22a79d1be39b391f902298b7f782dfb561885e3ff61a1eb7d45",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4b167866fd6b6d577e95866cc0116525df9e82c7fa1d8a7b629542d9cb6a34ad",
+				"dweb:/ipfs/QmPMcCq1jBxAPnpAtnUMq4812njcLiohr2NMQGjGWwKVYr"
+			]
+		},
+		"Semaphore/.git/objects/08/SemaphoreGroups.sol": {
+			"keccak256": "0xe66b52181784c58bf1dd6954d64b931936f4088df1dd2f7b6204a253d2c4e399",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2c1de4e791372ebec5cf3002ae9a43903ae2f5bc08c141ba2a3ed1012d8922e3",
+				"dweb:/ipfs/QmbJtqAums1TKgT71QqE39wQKxuuq3KPpfHsRUqcGUwzb6"
+			]
+		},
+		"poseidon-solidity/PoseidonT3.sol": {
+			"keccak256": "0x0102caa303bbc6690508f3615604f7730789ed990058c9513a87ccb30e4835be",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1fe7291d5f998eaf7dfe37961b8a8e72f60cf79a7a34459efa5683ca3a702971",
+				"dweb:/ipfs/QmQExqgvNEPKLq15rNygqmthUnAPWgTm4m3Bb5BCExwHF1"
+			]
+		}
+	},
+	"version": 1
+}

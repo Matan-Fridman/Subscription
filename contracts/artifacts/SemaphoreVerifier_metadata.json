@@ -1,0 +1,93 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[2]",
+						"name": "_pA",
+						"type": "uint256[2]"
+					},
+					{
+						"internalType": "uint256[2][2]",
+						"name": "_pB",
+						"type": "uint256[2][2]"
+					},
+					{
+						"internalType": "uint256[2]",
+						"name": "_pC",
+						"type": "uint256[2]"
+					},
+					{
+						"internalType": "uint256[4]",
+						"name": "_pubSignals",
+						"type": "uint256[4]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "merkleTreeDepth",
+						"type": "uint256"
+					}
+				],
+				"name": "verifyProof",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Semaphore/.git/objects/08/SemaphoreVerifier.sol": "SemaphoreVerifier"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Semaphore/.git/objects/08/Constants.sol": {
+			"keccak256": "0xbc7a079fb099a3c36534e9516fb044c9427b9ee3ff89ca42d3d7d5de0799e565",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://026f0688c15930da0031cf7eaae9d91545ed13e3fc7db57e8628e8166dd9c020",
+				"dweb:/ipfs/Qmf29uz8PxfxZHRUykVE4P7GHH5Hw888cMZ9mR3kwT251S"
+			]
+		},
+		"Semaphore/.git/objects/08/SemaphoreVerifier.sol": {
+			"keccak256": "0xaf4f62b60bc27276345dd67add48618757b3636f90417acde183d99c8da8d440",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://772e3bfa1fea1ee02f3825b8ea6601f51f678368507811eeaf49ea936ce26208",
+				"dweb:/ipfs/QmVJrHCrH3SKhRsS33qTDAb4W19G92muQ1TPYTYxiJwR3G"
+			]
+		}
+	},
+	"version": 1
+}

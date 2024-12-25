@@ -1,0 +1,162 @@
+{
+	"id": "bc449a526a4ef515179723511f1b37d7",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"Semaphore/.git/objects/08/Constants.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.26;\r\n\r\n/// @dev Minimum supported tree depth.\r\nuint8 constant MIN_DEPTH = 1;\r\n\r\n/// @dev Maximum supported tree depth.\r\nuint8 constant MAX_DEPTH = 12; "
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": [],
+			"evmVersion": "paris"
+		}
+	},
+	"output": {
+		"sources": {
+			"Semaphore/.git/objects/08/Constants.sol": {
+				"ast": {
+					"absolutePath": "Semaphore/.git/objects/08/Constants.sol",
+					"exportedSymbols": {
+						"MAX_DEPTH": [
+							9
+						],
+						"MIN_DEPTH": [
+							5
+						]
+					},
+					"id": 10,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"0.8",
+								".26"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"constant": true,
+							"id": 5,
+							"mutability": "constant",
+							"name": "MIN_DEPTH",
+							"nameLocation": "115:9:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 10,
+							"src": "100:28:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint8",
+								"typeString": "uint8"
+							},
+							"typeName": {
+								"id": 3,
+								"name": "uint8",
+								"nodeType": "ElementaryTypeName",
+								"src": "100:5:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint8",
+									"typeString": "uint8"
+								}
+							},
+							"value": {
+								"hexValue": "31",
+								"id": 4,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "127:1:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_1_by_1",
+									"typeString": "int_const 1"
+								},
+								"value": "1"
+							},
+							"visibility": "internal"
+						},
+						{
+							"constant": true,
+							"id": 9,
+							"mutability": "constant",
+							"name": "MAX_DEPTH",
+							"nameLocation": "188:9:0",
+							"nodeType": "VariableDeclaration",
+							"scope": 10,
+							"src": "173:29:0",
+							"stateVariable": false,
+							"storageLocation": "default",
+							"typeDescriptions": {
+								"typeIdentifier": "t_uint8",
+								"typeString": "uint8"
+							},
+							"typeName": {
+								"id": 7,
+								"name": "uint8",
+								"nodeType": "ElementaryTypeName",
+								"src": "173:5:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_uint8",
+									"typeString": "uint8"
+								}
+							},
+							"value": {
+								"hexValue": "3132",
+								"id": 8,
+								"isConstant": false,
+								"isLValue": false,
+								"isPure": true,
+								"kind": "number",
+								"lValueRequested": false,
+								"nodeType": "Literal",
+								"src": "200:2:0",
+								"typeDescriptions": {
+									"typeIdentifier": "t_rational_12_by_1",
+									"typeString": "int_const 12"
+								},
+								"value": "12"
+							},
+							"visibility": "internal"
+						}
+					],
+					"src": "33:171:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

@@ -1,0 +1,527 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "Semaphore__GroupHasNoMembers",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__InvalidProof",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__MerkleTreeDepthIsNotSupported",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__MerkleTreeRootIsExpired",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__MerkleTreeRootIsNotPartOfTheGroup",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Semaphore__YouAreUsingTheSameNullifierTwice",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "oldMerkleTreeDuration",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "newMerkleTreeDuration",
+						"type": "uint256"
+					}
+				],
+				"name": "GroupMerkleTreeDurationUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "merkleTreeDepth",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "merkleTreeRoot",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "nullifier",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "message",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "scope",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[8]",
+						"name": "points",
+						"type": "uint256[8]"
+					}
+				],
+				"name": "ProofValidated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					}
+				],
+				"name": "acceptGroupAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "identityCommitment",
+						"type": "uint256"
+					}
+				],
+				"name": "addMember",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "identityCommitments",
+						"type": "uint256[]"
+					}
+				],
+				"name": "addMembers",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "merkleTreeDuration",
+						"type": "uint256"
+					}
+				],
+				"name": "createGroup",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "createGroup",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					}
+				],
+				"name": "createGroup",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "identityCommitment",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "merkleProofSiblings",
+						"type": "uint256[]"
+					}
+				],
+				"name": "removeMember",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "newAdmin",
+						"type": "address"
+					}
+				],
+				"name": "updateGroupAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newMerkleTreeDuration",
+						"type": "uint256"
+					}
+				],
+				"name": "updateGroupMerkleTreeDuration",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "oldIdentityCommitment",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newIdentityCommitment",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "merkleProofSiblings",
+						"type": "uint256[]"
+					}
+				],
+				"name": "updateMember",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "merkleTreeDepth",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "merkleTreeRoot",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nullifier",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "message",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "scope",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256[8]",
+								"name": "points",
+								"type": "uint256[8]"
+							}
+						],
+						"internalType": "struct ISemaphore.SemaphoreProof",
+						"name": "proof",
+						"type": "tuple"
+					}
+				],
+				"name": "validateProof",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "merkleTreeDepth",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "merkleTreeRoot",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "nullifier",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "message",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "scope",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256[8]",
+								"name": "points",
+								"type": "uint256[8]"
+							}
+						],
+						"internalType": "struct ISemaphore.SemaphoreProof",
+						"name": "proof",
+						"type": "tuple"
+					}
+				],
+				"name": "verifyProof",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"events": {
+				"GroupMerkleTreeDurationUpdated(uint256,uint256,uint256)": {
+					"details": "Event emitted when the Merkle tree duration of a group is updated.",
+					"params": {
+						"groupId": ": Id of the group.",
+						"newMerkleTreeDuration": ": New Merkle tree duration of the group.",
+						"oldMerkleTreeDuration": ": Old Merkle tree duration of the group."
+					}
+				},
+				"ProofValidated(uint256,uint256,uint256,uint256,uint256,uint256,uint256[8])": {
+					"details": "Event emitted when a Semaphore proof is validated.",
+					"params": {
+						"groupId": ": Id of the group.",
+						"merkleTreeDepth": ": Depth of the Merkle tree.",
+						"merkleTreeRoot": ": Root of the Merkle tree.",
+						"message": ": Semaphore message.",
+						"nullifier": ": Nullifier.",
+						"points": ": Zero-knowledge points.",
+						"scope": ": Scope."
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"acceptGroupAdmin(uint256)": {
+					"details": "See {SemaphoreGroups-_acceptGroupAdmin}."
+				},
+				"addMember(uint256,uint256)": {
+					"details": "See {SemaphoreGroups-_addMember}."
+				},
+				"addMembers(uint256,uint256[])": {
+					"details": "See {SemaphoreGroups-_addMembers}."
+				},
+				"createGroup()": {
+					"details": "See {SemaphoreGroups-_createGroup}."
+				},
+				"createGroup(address)": {
+					"details": "See {SemaphoreGroups-_createGroup}."
+				},
+				"createGroup(address,uint256)": {
+					"details": "It creates a group with a custom Merkle tree duration.",
+					"params": {
+						"admin": ": Admin of the group. It can be an Ethereum account or a smart contract.",
+						"merkleTreeDuration": ": Merkle tree duration."
+					},
+					"returns": {
+						"_0": "Id of the group."
+					}
+				},
+				"removeMember(uint256,uint256,uint256[])": {
+					"details": "See {SemaphoreGroups-_removeMember}."
+				},
+				"updateGroupAdmin(uint256,address)": {
+					"details": "See {SemaphoreGroups-_updateGroupAdmin}."
+				},
+				"updateGroupMerkleTreeDuration(uint256,uint256)": {
+					"details": "Updates the group Merkle tree duration.",
+					"params": {
+						"groupId": ": Id of the group.",
+						"newMerkleTreeDuration": ": New Merkle tree duration."
+					}
+				},
+				"updateMember(uint256,uint256,uint256,uint256[])": {
+					"details": "See {SemaphoreGroups-_updateMember}."
+				},
+				"validateProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))": {
+					"details": "Saves the nullifier hash to prevent double signaling and emits an event if the zero-knowledge proof is valid.",
+					"params": {
+						"groupId": ": Id of the group.",
+						"proof": ": Semaphore zero-knowledge proof."
+					}
+				},
+				"verifyProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))": {
+					"details": "Verifies a zero-knowledge proof by returning true or false.",
+					"params": {
+						"groupId": ": Id of the group.",
+						"proof": ": Semaphore zero-knowledge proof."
+					}
+				}
+			},
+			"title": "Semaphore contract interface.",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Semaphore/.git/objects/08/ISemaphore.sol": "ISemaphore"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Semaphore/.git/objects/08/ISemaphore.sol": {
+			"keccak256": "0x2f5ddb7f5c1deb3bf32338048bd2df052136774da756a2a67743dbf24aa2371a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ca2d36bcb5e3301642ef214cdd8db3360254c11e77ccaa1267dd566177e7038b",
+				"dweb:/ipfs/QmSvCNyM1mJfZevWFyDQxAvcE87JWF2Z2pz6ak27GRdgzQ"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,524 @@
+{
+	"id": "0ee9abcaeb7e5f4dec9bc7d546c7efaa",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"Semaphore/.git/objects/08/ISemaphoreVerifier.sol": {
+				"content": "//SPDX-License-Identifier: MIT\r\npragma solidity 0.8.26;\r\n\r\n/// @title SemaphoreVerifier contract interface.\r\ninterface ISemaphoreVerifier {\r\n    /// @dev Returns true if the proof was successfully verified.\r\n    /// @param _pA: Point A.\r\n    /// @param _pB: Point B.\r\n    /// @param _pC: Point C.\r\n    /// @param _pubSignals: Public signals.\r\n    /// @param merkleTreeDepth: Merkle tree depth.\r\n    /// @return True if the proof was successfully verified, false otherwise.\r\n    function verifyProof(\r\n        uint[2] calldata _pA,\r\n        uint[2][2] calldata _pB,\r\n        uint[2] calldata _pC,\r\n        uint[4] calldata _pubSignals,\r\n        uint merkleTreeDepth\r\n    ) external view returns (bool);\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": [],
+			"evmVersion": "paris"
+		}
+	},
+	"output": {
+		"contracts": {
+			"Semaphore/.git/objects/08/ISemaphoreVerifier.sol": {
+				"ISemaphoreVerifier": {
+					"abi": [
+						{
+							"inputs": [
+								{
+									"internalType": "uint256[2]",
+									"name": "_pA",
+									"type": "uint256[2]"
+								},
+								{
+									"internalType": "uint256[2][2]",
+									"name": "_pB",
+									"type": "uint256[2][2]"
+								},
+								{
+									"internalType": "uint256[2]",
+									"name": "_pC",
+									"type": "uint256[2]"
+								},
+								{
+									"internalType": "uint256[4]",
+									"name": "_pubSignals",
+									"type": "uint256[4]"
+								},
+								{
+									"internalType": "uint256",
+									"name": "merkleTreeDepth",
+									"type": "uint256"
+								}
+							],
+							"name": "verifyProof",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {
+							"verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4],uint256)": {
+								"details": "Returns true if the proof was successfully verified.",
+								"params": {
+									"_pA": ": Point A.",
+									"_pB": ": Point B.",
+									"_pC": ": Point C.",
+									"_pubSignals": ": Public signals.",
+									"merkleTreeDepth": ": Merkle tree depth."
+								},
+								"returns": {
+									"_0": "True if the proof was successfully verified, false otherwise."
+								}
+							}
+						},
+						"title": "SemaphoreVerifier contract interface.",
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4],uint256)": "a23f0199"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.26+commit.8a97fa7a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"_pA\",\"type\":\"uint256[2]\"},{\"internalType\":\"uint256[2][2]\",\"name\":\"_pB\",\"type\":\"uint256[2][2]\"},{\"internalType\":\"uint256[2]\",\"name\":\"_pC\",\"type\":\"uint256[2]\"},{\"internalType\":\"uint256[4]\",\"name\":\"_pubSignals\",\"type\":\"uint256[4]\"},{\"internalType\":\"uint256\",\"name\":\"merkleTreeDepth\",\"type\":\"uint256\"}],\"name\":\"verifyProof\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4],uint256)\":{\"details\":\"Returns true if the proof was successfully verified.\",\"params\":{\"_pA\":\": Point A.\",\"_pB\":\": Point B.\",\"_pC\":\": Point C.\",\"_pubSignals\":\": Public signals.\",\"merkleTreeDepth\":\": Merkle tree depth.\"},\"returns\":{\"_0\":\"True if the proof was successfully verified, false otherwise.\"}}},\"title\":\"SemaphoreVerifier contract interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"Semaphore/.git/objects/08/ISemaphoreVerifier.sol\":\"ISemaphoreVerifier\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"Semaphore/.git/objects/08/ISemaphoreVerifier.sol\":{\"keccak256\":\"0xbe8d0ee669c14b82ace2cc7ca6c4a3a618fdba7a480e1f505ede9cff2cfe869f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0f36a17f3d4cceab886672aafc2598d79da4362b19d9ae532631c2a638079a22\",\"dweb:/ipfs/QmYuSzzQEXBDgk5f1zuYCdqegHYnmbjpra9qXQQkzrYDjP\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"Semaphore/.git/objects/08/ISemaphoreVerifier.sol": {
+				"ast": {
+					"absolutePath": "Semaphore/.git/objects/08/ISemaphoreVerifier.sol",
+					"exportedSymbols": {
+						"ISemaphoreVerifier": [
+							29
+						]
+					},
+					"id": 30,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"0.8",
+								".26"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "32:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "ISemaphoreVerifier",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"documentation": {
+								"id": 2,
+								"nodeType": "StructuredDocumentation",
+								"src": "59:50:0",
+								"text": "@title SemaphoreVerifier contract interface."
+							},
+							"fullyImplemented": false,
+							"id": 29,
+							"linearizedBaseContracts": [
+								29
+							],
+							"name": "ISemaphoreVerifier",
+							"nameLocation": "119:18:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"documentation": {
+										"id": 3,
+										"nodeType": "StructuredDocumentation",
+										"src": "145:327:0",
+										"text": "@dev Returns true if the proof was successfully verified.\n @param _pA: Point A.\n @param _pB: Point B.\n @param _pC: Point C.\n @param _pubSignals: Public signals.\n @param merkleTreeDepth: Merkle tree depth.\n @return True if the proof was successfully verified, false otherwise."
+									},
+									"functionSelector": "a23f0199",
+									"id": 28,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "verifyProof",
+									"nameLocation": "487:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 24,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 7,
+												"mutability": "mutable",
+												"name": "_pA",
+												"nameLocation": "526:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "509:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$2_calldata_ptr",
+													"typeString": "uint256[2]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 4,
+														"name": "uint",
+														"nodeType": "ElementaryTypeName",
+														"src": "509:4:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 6,
+													"length": {
+														"hexValue": "32",
+														"id": 5,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "514:1:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_2_by_1",
+															"typeString": "int_const 2"
+														},
+														"value": "2"
+													},
+													"nodeType": "ArrayTypeName",
+													"src": "509:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$2_storage_ptr",
+														"typeString": "uint256[2]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 13,
+												"mutability": "mutable",
+												"name": "_pB",
+												"nameLocation": "560:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "540:23:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_array$_t_uint256_$2_calldata_ptr_$2_calldata_ptr",
+													"typeString": "uint256[2][2]"
+												},
+												"typeName": {
+													"baseType": {
+														"baseType": {
+															"id": 8,
+															"name": "uint",
+															"nodeType": "ElementaryTypeName",
+															"src": "540:4:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_uint256",
+																"typeString": "uint256"
+															}
+														},
+														"id": 10,
+														"length": {
+															"hexValue": "32",
+															"id": 9,
+															"isConstant": false,
+															"isLValue": false,
+															"isPure": true,
+															"kind": "number",
+															"lValueRequested": false,
+															"nodeType": "Literal",
+															"src": "545:1:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_rational_2_by_1",
+																"typeString": "int_const 2"
+															},
+															"value": "2"
+														},
+														"nodeType": "ArrayTypeName",
+														"src": "540:7:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_array$_t_uint256_$2_storage_ptr",
+															"typeString": "uint256[2]"
+														}
+													},
+													"id": 12,
+													"length": {
+														"hexValue": "32",
+														"id": 11,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "548:1:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_2_by_1",
+															"typeString": "int_const 2"
+														},
+														"value": "2"
+													},
+													"nodeType": "ArrayTypeName",
+													"src": "540:10:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_array$_t_uint256_$2_storage_$2_storage_ptr",
+														"typeString": "uint256[2][2]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 17,
+												"mutability": "mutable",
+												"name": "_pC",
+												"nameLocation": "591:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "574:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$2_calldata_ptr",
+													"typeString": "uint256[2]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 14,
+														"name": "uint",
+														"nodeType": "ElementaryTypeName",
+														"src": "574:4:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 16,
+													"length": {
+														"hexValue": "32",
+														"id": 15,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "579:1:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_2_by_1",
+															"typeString": "int_const 2"
+														},
+														"value": "2"
+													},
+													"nodeType": "ArrayTypeName",
+													"src": "574:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$2_storage_ptr",
+														"typeString": "uint256[2]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 21,
+												"mutability": "mutable",
+												"name": "_pubSignals",
+												"nameLocation": "622:11:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "605:28:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$4_calldata_ptr",
+													"typeString": "uint256[4]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 18,
+														"name": "uint",
+														"nodeType": "ElementaryTypeName",
+														"src": "605:4:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 20,
+													"length": {
+														"hexValue": "34",
+														"id": 19,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "610:1:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_4_by_1",
+															"typeString": "int_const 4"
+														},
+														"value": "4"
+													},
+													"nodeType": "ArrayTypeName",
+													"src": "605:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$4_storage_ptr",
+														"typeString": "uint256[4]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 23,
+												"mutability": "mutable",
+												"name": "merkleTreeDepth",
+												"nameLocation": "649:15:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "644:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 22,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "644:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "498:173:0"
+									},
+									"returnParameters": {
+										"id": 27,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 26,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "695:4:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												},
+												"typeName": {
+													"id": 25,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "695:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "694:6:0"
+									},
+									"scope": 29,
+									"src": "478:223:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 30,
+							"src": "109:595:0",
+							"usedErrors": [],
+							"usedEvents": []
+						}
+					],
+					"src": "32:672:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

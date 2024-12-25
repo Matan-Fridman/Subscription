@@ -1,0 +1,2086 @@
+{
+	"id": "9b2a010783bad5ec13b0abd83dc80e39",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"Semaphore/.git/objects/08/ISemaphoreGroups.sol": {
+				"content": "//SPDX-License-Identifier: MIT\r\npragma solidity 0.8.26;\r\n\r\n/// @title SemaphoreGroups contract interface.\r\ninterface ISemaphoreGroups {\r\n    error Semaphore__GroupDoesNotExist();\r\n    error Semaphore__CallerIsNotTheGroupAdmin();\r\n    error Semaphore__CallerIsNotThePendingGroupAdmin();\r\n\r\n    /// @dev Event emitted when a new group is created.\r\n    /// @param groupId: Id of the group.\r\n    event GroupCreated(uint256 indexed groupId);\r\n\r\n    /// @dev Event emitted when a new admin is assigned to a group.\r\n    /// @param groupId: Id of the group.\r\n    /// @param oldAdmin: Old admin of the group.\r\n    /// @param newAdmin: New admin of the group.\r\n    event GroupAdminUpdated(uint256 indexed groupId, address indexed oldAdmin, address indexed newAdmin);\r\n\r\n    /// @dev Event emitted when a group admin is being updated.\r\n    /// @param groupId: Id of the group.\r\n    /// @param oldAdmin: Old admin of the group.\r\n    /// @param newAdmin: New admin of the group.\r\n    event GroupAdminPending(uint256 indexed groupId, address indexed oldAdmin, address indexed newAdmin);\r\n\r\n    /// @dev Event emitted when a new identity commitment is added.\r\n    /// @param groupId: Group id of the group.\r\n    /// @param index: Merkle tree leaf index.\r\n    /// @param identityCommitment: New identity commitment.\r\n    /// @param merkleTreeRoot: New root hash of the tree.\r\n    event MemberAdded(uint256 indexed groupId, uint256 index, uint256 identityCommitment, uint256 merkleTreeRoot);\r\n\r\n    /// @dev Event emitted when many identity commitments are added at the same time.\r\n    /// @param groupId: Group id of the group.\r\n    /// @param startIndex: Index of the first element of the new identity commitments in the merkle tree.\r\n    /// @param identityCommitments: The new identity commitments.\r\n    /// @param merkleTreeRoot: New root hash of the tree.\r\n    event MembersAdded(\r\n        uint256 indexed groupId,\r\n        uint256 startIndex,\r\n        uint256[] identityCommitments,\r\n        uint256 merkleTreeRoot\r\n    );\r\n\r\n    /// @dev Event emitted when an identity commitment is updated.\r\n    /// @param groupId: Group id of the group.\r\n    /// @param index: Identity commitment index.\r\n    /// @param identityCommitment: Existing identity commitment to be updated.\r\n    /// @param newIdentityCommitment: New identity commitment.\r\n    /// @param merkleTreeRoot: New root hash of the tree.\r\n    event MemberUpdated(\r\n        uint256 indexed groupId,\r\n        uint256 index,\r\n        uint256 identityCommitment,\r\n        uint256 newIdentityCommitment,\r\n        uint256 merkleTreeRoot\r\n    );\r\n\r\n    /// @dev Event emitted when a new identity commitment is removed.\r\n    /// @param groupId: Group id of the group.\r\n    /// @param index: Identity commitment index.\r\n    /// @param identityCommitment: Existing identity commitment to be removed.\r\n    /// @param merkleTreeRoot: New root hash of the tree.\r\n    event MemberRemoved(uint256 indexed groupId, uint256 index, uint256 identityCommitment, uint256 merkleTreeRoot);\r\n\r\n    /// @dev Returns the address of the group admin. The group admin can be an Ethereum account or a smart contract.\r\n    /// @param groupId: Id of the group.\r\n    /// @return Address of the group admin.\r\n    function getGroupAdmin(uint256 groupId) external view returns (address);\r\n\r\n    /// @dev Returns true if a member exists in a group.\r\n    /// @param groupId: Id of the group.\r\n    /// @param identityCommitment: Identity commitment.\r\n    /// @return True if the member exists, false otherwise.\r\n    function hasMember(uint256 groupId, uint256 identityCommitment) external view returns (bool);\r\n\r\n    /// @dev Returns the index of a member.\r\n    /// @param groupId: Id of the group.\r\n    /// @param identityCommitment: Identity commitment.\r\n    /// @return Index of member.\r\n    function indexOf(uint256 groupId, uint256 identityCommitment) external view returns (uint256);\r\n\r\n    /// @dev Returns the last root hash of a group.\r\n    /// @param groupId: Id of the group.\r\n    /// @return Root hash of the group.\r\n    function getMerkleTreeRoot(uint256 groupId) external view returns (uint256);\r\n\r\n    /// @dev Returns the depth of the tree of a group.\r\n    /// @param groupId: Id of the group.\r\n    /// @return Depth of the group tree.\r\n    function getMerkleTreeDepth(uint256 groupId) external view returns (uint256);\r\n\r\n    /// @dev Returns the number of tree leaves of a group.\r\n    /// @param groupId: Id of the group.\r\n    /// @return Number of tree leaves.\r\n    function getMerkleTreeSize(uint256 groupId) external view returns (uint256);\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": [],
+			"evmVersion": "paris"
+		}
+	},
+	"output": {
+		"contracts": {
+			"Semaphore/.git/objects/08/ISemaphoreGroups.sol": {
+				"ISemaphoreGroups": {
+					"abi": [
+						{
+							"inputs": [],
+							"name": "Semaphore__CallerIsNotTheGroupAdmin",
+							"type": "error"
+						},
+						{
+							"inputs": [],
+							"name": "Semaphore__CallerIsNotThePendingGroupAdmin",
+							"type": "error"
+						},
+						{
+							"inputs": [],
+							"name": "Semaphore__GroupDoesNotExist",
+							"type": "error"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "oldAdmin",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "newAdmin",
+									"type": "address"
+								}
+							],
+							"name": "GroupAdminPending",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "oldAdmin",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "newAdmin",
+									"type": "address"
+								}
+							],
+							"name": "GroupAdminUpdated",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								}
+							],
+							"name": "GroupCreated",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "index",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "identityCommitment",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "merkleTreeRoot",
+									"type": "uint256"
+								}
+							],
+							"name": "MemberAdded",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "index",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "identityCommitment",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "merkleTreeRoot",
+									"type": "uint256"
+								}
+							],
+							"name": "MemberRemoved",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "index",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "identityCommitment",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "newIdentityCommitment",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "merkleTreeRoot",
+									"type": "uint256"
+								}
+							],
+							"name": "MemberUpdated",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "startIndex",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256[]",
+									"name": "identityCommitments",
+									"type": "uint256[]"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "merkleTreeRoot",
+									"type": "uint256"
+								}
+							],
+							"name": "MembersAdded",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								}
+							],
+							"name": "getGroupAdmin",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								}
+							],
+							"name": "getMerkleTreeDepth",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								}
+							],
+							"name": "getMerkleTreeRoot",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								}
+							],
+							"name": "getMerkleTreeSize",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "identityCommitment",
+									"type": "uint256"
+								}
+							],
+							"name": "hasMember",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "identityCommitment",
+									"type": "uint256"
+								}
+							],
+							"name": "indexOf",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"events": {
+							"GroupAdminPending(uint256,address,address)": {
+								"details": "Event emitted when a group admin is being updated.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"newAdmin": ": New admin of the group.",
+									"oldAdmin": ": Old admin of the group."
+								}
+							},
+							"GroupAdminUpdated(uint256,address,address)": {
+								"details": "Event emitted when a new admin is assigned to a group.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"newAdmin": ": New admin of the group.",
+									"oldAdmin": ": Old admin of the group."
+								}
+							},
+							"GroupCreated(uint256)": {
+								"details": "Event emitted when a new group is created.",
+								"params": {
+									"groupId": ": Id of the group."
+								}
+							},
+							"MemberAdded(uint256,uint256,uint256,uint256)": {
+								"details": "Event emitted when a new identity commitment is added.",
+								"params": {
+									"groupId": ": Group id of the group.",
+									"identityCommitment": ": New identity commitment.",
+									"index": ": Merkle tree leaf index.",
+									"merkleTreeRoot": ": New root hash of the tree."
+								}
+							},
+							"MemberRemoved(uint256,uint256,uint256,uint256)": {
+								"details": "Event emitted when a new identity commitment is removed.",
+								"params": {
+									"groupId": ": Group id of the group.",
+									"identityCommitment": ": Existing identity commitment to be removed.",
+									"index": ": Identity commitment index.",
+									"merkleTreeRoot": ": New root hash of the tree."
+								}
+							},
+							"MemberUpdated(uint256,uint256,uint256,uint256,uint256)": {
+								"details": "Event emitted when an identity commitment is updated.",
+								"params": {
+									"groupId": ": Group id of the group.",
+									"identityCommitment": ": Existing identity commitment to be updated.",
+									"index": ": Identity commitment index.",
+									"merkleTreeRoot": ": New root hash of the tree.",
+									"newIdentityCommitment": ": New identity commitment."
+								}
+							},
+							"MembersAdded(uint256,uint256,uint256[],uint256)": {
+								"details": "Event emitted when many identity commitments are added at the same time.",
+								"params": {
+									"groupId": ": Group id of the group.",
+									"identityCommitments": ": The new identity commitments.",
+									"merkleTreeRoot": ": New root hash of the tree.",
+									"startIndex": ": Index of the first element of the new identity commitments in the merkle tree."
+								}
+							}
+						},
+						"kind": "dev",
+						"methods": {
+							"getGroupAdmin(uint256)": {
+								"details": "Returns the address of the group admin. The group admin can be an Ethereum account or a smart contract.",
+								"params": {
+									"groupId": ": Id of the group."
+								},
+								"returns": {
+									"_0": "Address of the group admin."
+								}
+							},
+							"getMerkleTreeDepth(uint256)": {
+								"details": "Returns the depth of the tree of a group.",
+								"params": {
+									"groupId": ": Id of the group."
+								},
+								"returns": {
+									"_0": "Depth of the group tree."
+								}
+							},
+							"getMerkleTreeRoot(uint256)": {
+								"details": "Returns the last root hash of a group.",
+								"params": {
+									"groupId": ": Id of the group."
+								},
+								"returns": {
+									"_0": "Root hash of the group."
+								}
+							},
+							"getMerkleTreeSize(uint256)": {
+								"details": "Returns the number of tree leaves of a group.",
+								"params": {
+									"groupId": ": Id of the group."
+								},
+								"returns": {
+									"_0": "Number of tree leaves."
+								}
+							},
+							"hasMember(uint256,uint256)": {
+								"details": "Returns true if a member exists in a group.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"identityCommitment": ": Identity commitment."
+								},
+								"returns": {
+									"_0": "True if the member exists, false otherwise."
+								}
+							},
+							"indexOf(uint256,uint256)": {
+								"details": "Returns the index of a member.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"identityCommitment": ": Identity commitment."
+								},
+								"returns": {
+									"_0": "Index of member."
+								}
+							}
+						},
+						"title": "SemaphoreGroups contract interface.",
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"getGroupAdmin(uint256)": "a9961c94",
+							"getMerkleTreeDepth(uint256)": "6389e107",
+							"getMerkleTreeRoot(uint256)": "dabc4d51",
+							"getMerkleTreeSize(uint256)": "7ee35a0c",
+							"hasMember(uint256,uint256)": "90509d44",
+							"indexOf(uint256,uint256)": "06dd8485"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.26+commit.8a97fa7a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"Semaphore__CallerIsNotTheGroupAdmin\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Semaphore__CallerIsNotThePendingGroupAdmin\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Semaphore__GroupDoesNotExist\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldAdmin\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"GroupAdminPending\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldAdmin\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"GroupAdminUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"}],\"name\":\"GroupCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"identityCommitment\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"merkleTreeRoot\",\"type\":\"uint256\"}],\"name\":\"MemberAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"identityCommitment\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"merkleTreeRoot\",\"type\":\"uint256\"}],\"name\":\"MemberRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"identityCommitment\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newIdentityCommitment\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"merkleTreeRoot\",\"type\":\"uint256\"}],\"name\":\"MemberUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"startIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"identityCommitments\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"merkleTreeRoot\",\"type\":\"uint256\"}],\"name\":\"MembersAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"}],\"name\":\"getGroupAdmin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"}],\"name\":\"getMerkleTreeDepth\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"}],\"name\":\"getMerkleTreeRoot\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"}],\"name\":\"getMerkleTreeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"identityCommitment\",\"type\":\"uint256\"}],\"name\":\"hasMember\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"identityCommitment\",\"type\":\"uint256\"}],\"name\":\"indexOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"GroupAdminPending(uint256,address,address)\":{\"details\":\"Event emitted when a group admin is being updated.\",\"params\":{\"groupId\":\": Id of the group.\",\"newAdmin\":\": New admin of the group.\",\"oldAdmin\":\": Old admin of the group.\"}},\"GroupAdminUpdated(uint256,address,address)\":{\"details\":\"Event emitted when a new admin is assigned to a group.\",\"params\":{\"groupId\":\": Id of the group.\",\"newAdmin\":\": New admin of the group.\",\"oldAdmin\":\": Old admin of the group.\"}},\"GroupCreated(uint256)\":{\"details\":\"Event emitted when a new group is created.\",\"params\":{\"groupId\":\": Id of the group.\"}},\"MemberAdded(uint256,uint256,uint256,uint256)\":{\"details\":\"Event emitted when a new identity commitment is added.\",\"params\":{\"groupId\":\": Group id of the group.\",\"identityCommitment\":\": New identity commitment.\",\"index\":\": Merkle tree leaf index.\",\"merkleTreeRoot\":\": New root hash of the tree.\"}},\"MemberRemoved(uint256,uint256,uint256,uint256)\":{\"details\":\"Event emitted when a new identity commitment is removed.\",\"params\":{\"groupId\":\": Group id of the group.\",\"identityCommitment\":\": Existing identity commitment to be removed.\",\"index\":\": Identity commitment index.\",\"merkleTreeRoot\":\": New root hash of the tree.\"}},\"MemberUpdated(uint256,uint256,uint256,uint256,uint256)\":{\"details\":\"Event emitted when an identity commitment is updated.\",\"params\":{\"groupId\":\": Group id of the group.\",\"identityCommitment\":\": Existing identity commitment to be updated.\",\"index\":\": Identity commitment index.\",\"merkleTreeRoot\":\": New root hash of the tree.\",\"newIdentityCommitment\":\": New identity commitment.\"}},\"MembersAdded(uint256,uint256,uint256[],uint256)\":{\"details\":\"Event emitted when many identity commitments are added at the same time.\",\"params\":{\"groupId\":\": Group id of the group.\",\"identityCommitments\":\": The new identity commitments.\",\"merkleTreeRoot\":\": New root hash of the tree.\",\"startIndex\":\": Index of the first element of the new identity commitments in the merkle tree.\"}}},\"kind\":\"dev\",\"methods\":{\"getGroupAdmin(uint256)\":{\"details\":\"Returns the address of the group admin. The group admin can be an Ethereum account or a smart contract.\",\"params\":{\"groupId\":\": Id of the group.\"},\"returns\":{\"_0\":\"Address of the group admin.\"}},\"getMerkleTreeDepth(uint256)\":{\"details\":\"Returns the depth of the tree of a group.\",\"params\":{\"groupId\":\": Id of the group.\"},\"returns\":{\"_0\":\"Depth of the group tree.\"}},\"getMerkleTreeRoot(uint256)\":{\"details\":\"Returns the last root hash of a group.\",\"params\":{\"groupId\":\": Id of the group.\"},\"returns\":{\"_0\":\"Root hash of the group.\"}},\"getMerkleTreeSize(uint256)\":{\"details\":\"Returns the number of tree leaves of a group.\",\"params\":{\"groupId\":\": Id of the group.\"},\"returns\":{\"_0\":\"Number of tree leaves.\"}},\"hasMember(uint256,uint256)\":{\"details\":\"Returns true if a member exists in a group.\",\"params\":{\"groupId\":\": Id of the group.\",\"identityCommitment\":\": Identity commitment.\"},\"returns\":{\"_0\":\"True if the member exists, false otherwise.\"}},\"indexOf(uint256,uint256)\":{\"details\":\"Returns the index of a member.\",\"params\":{\"groupId\":\": Id of the group.\",\"identityCommitment\":\": Identity commitment.\"},\"returns\":{\"_0\":\"Index of member.\"}}},\"title\":\"SemaphoreGroups contract interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"Semaphore/.git/objects/08/ISemaphoreGroups.sol\":\"ISemaphoreGroups\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"Semaphore/.git/objects/08/ISemaphoreGroups.sol\":{\"keccak256\":\"0x0068c9db7a30c22a79d1be39b391f902298b7f782dfb561885e3ff61a1eb7d45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4b167866fd6b6d577e95866cc0116525df9e82c7fa1d8a7b629542d9cb6a34ad\",\"dweb:/ipfs/QmPMcCq1jBxAPnpAtnUMq4812njcLiohr2NMQGjGWwKVYr\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"Semaphore/.git/objects/08/ISemaphoreGroups.sol": {
+				"ast": {
+					"absolutePath": "Semaphore/.git/objects/08/ISemaphoreGroups.sol",
+					"exportedSymbols": {
+						"ISemaphoreGroups": [
+							131
+						]
+					},
+					"id": 132,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"0.8",
+								".26"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "32:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "ISemaphoreGroups",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"documentation": {
+								"id": 2,
+								"nodeType": "StructuredDocumentation",
+								"src": "59:48:0",
+								"text": "@title SemaphoreGroups contract interface."
+							},
+							"fullyImplemented": false,
+							"id": 131,
+							"linearizedBaseContracts": [
+								131
+							],
+							"name": "ISemaphoreGroups",
+							"nameLocation": "117:16:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"errorSelector": "029f0579",
+									"id": 4,
+									"name": "Semaphore__GroupDoesNotExist",
+									"nameLocation": "147:28:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 3,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "175:2:0"
+									},
+									"src": "141:37:0"
+								},
+								{
+									"errorSelector": "bb9bf278",
+									"id": 6,
+									"name": "Semaphore__CallerIsNotTheGroupAdmin",
+									"nameLocation": "190:35:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 5,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "225:2:0"
+									},
+									"src": "184:44:0"
+								},
+								{
+									"errorSelector": "34c4245d",
+									"id": 8,
+									"name": "Semaphore__CallerIsNotThePendingGroupAdmin",
+									"nameLocation": "240:42:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 7,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "282:2:0"
+									},
+									"src": "234:51:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 9,
+										"nodeType": "StructuredDocumentation",
+										"src": "293:93:0",
+										"text": "@dev Event emitted when a new group is created.\n @param groupId: Id of the group."
+									},
+									"eventSelector": "f0adfb94eab6daf835deb69c5738fe636150c3dfd08094a76f39b963dc8cb05a",
+									"id": 13,
+									"name": "GroupCreated",
+									"nameLocation": "398:12:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 12,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 11,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "427:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 13,
+												"src": "411:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 10,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "411:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "410:25:0"
+									},
+									"src": "392:44:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 14,
+										"nodeType": "StructuredDocumentation",
+										"src": "444:205:0",
+										"text": "@dev Event emitted when a new admin is assigned to a group.\n @param groupId: Id of the group.\n @param oldAdmin: Old admin of the group.\n @param newAdmin: New admin of the group."
+									},
+									"eventSelector": "0ba83579a0e79193ef649b9f5a8759d35af086ba62a3e207b52e4a8ae30d49e3",
+									"id": 22,
+									"name": "GroupAdminUpdated",
+									"nameLocation": "661:17:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 21,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 16,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "695:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 22,
+												"src": "679:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 15,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "679:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 18,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "oldAdmin",
+												"nameLocation": "720:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 22,
+												"src": "704:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "704:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 20,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "newAdmin",
+												"nameLocation": "746:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 22,
+												"src": "730:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 19,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "730:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "678:77:0"
+									},
+									"src": "655:101:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 23,
+										"nodeType": "StructuredDocumentation",
+										"src": "764:201:0",
+										"text": "@dev Event emitted when a group admin is being updated.\n @param groupId: Id of the group.\n @param oldAdmin: Old admin of the group.\n @param newAdmin: New admin of the group."
+									},
+									"eventSelector": "1018365553cce55d9cb02ef73e18cc9311894f3fe1d1eafd235ac2d26cd8ba58",
+									"id": 31,
+									"name": "GroupAdminPending",
+									"nameLocation": "977:17:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 30,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 25,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "1011:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 31,
+												"src": "995:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 24,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "995:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 27,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "oldAdmin",
+												"nameLocation": "1036:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 31,
+												"src": "1020:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 26,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "1020:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 29,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "newAdmin",
+												"nameLocation": "1062:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 31,
+												"src": "1046:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 28,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "1046:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "994:77:0"
+									},
+									"src": "971:101:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 32,
+										"nodeType": "StructuredDocumentation",
+										"src": "1080:278:0",
+										"text": "@dev Event emitted when a new identity commitment is added.\n @param groupId: Group id of the group.\n @param index: Merkle tree leaf index.\n @param identityCommitment: New identity commitment.\n @param merkleTreeRoot: New root hash of the tree."
+									},
+									"eventSelector": "19239b3f93cd10558aaf11423af70c77763bf54f52bcc75bfa74d4d13548cde9",
+									"id": 42,
+									"name": "MemberAdded",
+									"nameLocation": "1370:11:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 41,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 34,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "1398:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 42,
+												"src": "1382:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 33,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1382:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 36,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "index",
+												"nameLocation": "1415:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 42,
+												"src": "1407:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 35,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1407:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 38,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "identityCommitment",
+												"nameLocation": "1430:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 42,
+												"src": "1422:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 37,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1422:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 40,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "merkleTreeRoot",
+												"nameLocation": "1458:14:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 42,
+												"src": "1450:22:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 39,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1450:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1381:92:0"
+									},
+									"src": "1364:110:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 43,
+										"nodeType": "StructuredDocumentation",
+										"src": "1482:362:0",
+										"text": "@dev Event emitted when many identity commitments are added at the same time.\n @param groupId: Group id of the group.\n @param startIndex: Index of the first element of the new identity commitments in the merkle tree.\n @param identityCommitments: The new identity commitments.\n @param merkleTreeRoot: New root hash of the tree."
+									},
+									"eventSelector": "61e5e8054e3daf084a0c6c646c065e8bf5e7ca4d5567bda942309bd1652f349d",
+									"id": 54,
+									"name": "MembersAdded",
+									"nameLocation": "1856:12:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 53,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 45,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "1895:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 54,
+												"src": "1879:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 44,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1879:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 47,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "startIndex",
+												"nameLocation": "1921:10:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 54,
+												"src": "1913:18:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 46,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1913:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 50,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "identityCommitments",
+												"nameLocation": "1952:19:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 54,
+												"src": "1942:29:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+													"typeString": "uint256[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 48,
+														"name": "uint256",
+														"nodeType": "ElementaryTypeName",
+														"src": "1942:7:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 49,
+													"nodeType": "ArrayTypeName",
+													"src": "1942:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+														"typeString": "uint256[]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 52,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "merkleTreeRoot",
+												"nameLocation": "1990:14:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 54,
+												"src": "1982:22:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 51,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1982:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1868:143:0"
+									},
+									"src": "1850:162:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 55,
+										"nodeType": "StructuredDocumentation",
+										"src": "2020:363:0",
+										"text": "@dev Event emitted when an identity commitment is updated.\n @param groupId: Group id of the group.\n @param index: Identity commitment index.\n @param identityCommitment: Existing identity commitment to be updated.\n @param newIdentityCommitment: New identity commitment.\n @param merkleTreeRoot: New root hash of the tree."
+									},
+									"eventSelector": "ea3588e4a2a0c93d6a0e69dfeaf7496f43ccccf02ad9ce0a5b7627cbca4b61b1",
+									"id": 67,
+									"name": "MemberUpdated",
+									"nameLocation": "2395:13:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 66,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 57,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "2435:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 67,
+												"src": "2419:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 56,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2419:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 59,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "index",
+												"nameLocation": "2461:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 67,
+												"src": "2453:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 58,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2453:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 61,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "identityCommitment",
+												"nameLocation": "2485:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 67,
+												"src": "2477:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 60,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2477:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 63,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "newIdentityCommitment",
+												"nameLocation": "2522:21:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 67,
+												"src": "2514:29:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 62,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2514:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 65,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "merkleTreeRoot",
+												"nameLocation": "2562:14:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 67,
+												"src": "2554:22:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 64,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2554:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2408:175:0"
+									},
+									"src": "2389:195:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 68,
+										"nodeType": "StructuredDocumentation",
+										"src": "2592:302:0",
+										"text": "@dev Event emitted when a new identity commitment is removed.\n @param groupId: Group id of the group.\n @param index: Identity commitment index.\n @param identityCommitment: Existing identity commitment to be removed.\n @param merkleTreeRoot: New root hash of the tree."
+									},
+									"eventSelector": "3108849c053c77b8073a11256dffb5ffd5b55e93e105a355e1c9061db890d871",
+									"id": 78,
+									"name": "MemberRemoved",
+									"nameLocation": "2906:13:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 77,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 70,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "2936:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 78,
+												"src": "2920:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 69,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2920:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 72,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "index",
+												"nameLocation": "2953:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 78,
+												"src": "2945:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 71,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2945:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 74,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "identityCommitment",
+												"nameLocation": "2968:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 78,
+												"src": "2960:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 73,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2960:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 76,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "merkleTreeRoot",
+												"nameLocation": "2996:14:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 78,
+												"src": "2988:22:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 75,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2988:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2919:92:0"
+									},
+									"src": "2900:112:0"
+								},
+								{
+									"documentation": {
+										"id": 79,
+										"nodeType": "StructuredDocumentation",
+										"src": "3020:199:0",
+										"text": "@dev Returns the address of the group admin. The group admin can be an Ethereum account or a smart contract.\n @param groupId: Id of the group.\n @return Address of the group admin."
+									},
+									"functionSelector": "a9961c94",
+									"id": 86,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getGroupAdmin",
+									"nameLocation": "3234:13:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 82,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 81,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3256:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 86,
+												"src": "3248:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 80,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3248:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3247:17:0"
+									},
+									"returnParameters": {
+										"id": 85,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 84,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 86,
+												"src": "3288:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 83,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "3288:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3287:9:0"
+									},
+									"scope": 131,
+									"src": "3225:72:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 87,
+										"nodeType": "StructuredDocumentation",
+										"src": "3305:212:0",
+										"text": "@dev Returns true if a member exists in a group.\n @param groupId: Id of the group.\n @param identityCommitment: Identity commitment.\n @return True if the member exists, false otherwise."
+									},
+									"functionSelector": "90509d44",
+									"id": 96,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "hasMember",
+									"nameLocation": "3532:9:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 92,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 89,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3550:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 96,
+												"src": "3542:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 88,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3542:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 91,
+												"mutability": "mutable",
+												"name": "identityCommitment",
+												"nameLocation": "3567:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 96,
+												"src": "3559:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 90,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3559:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3541:45:0"
+									},
+									"returnParameters": {
+										"id": 95,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 94,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 96,
+												"src": "3610:4:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												},
+												"typeName": {
+													"id": 93,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "3610:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3609:6:0"
+									},
+									"scope": 131,
+									"src": "3523:93:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 97,
+										"nodeType": "StructuredDocumentation",
+										"src": "3624:172:0",
+										"text": "@dev Returns the index of a member.\n @param groupId: Id of the group.\n @param identityCommitment: Identity commitment.\n @return Index of member."
+									},
+									"functionSelector": "06dd8485",
+									"id": 106,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "indexOf",
+									"nameLocation": "3811:7:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 102,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 99,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3827:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 106,
+												"src": "3819:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 98,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3819:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 101,
+												"mutability": "mutable",
+												"name": "identityCommitment",
+												"nameLocation": "3844:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 106,
+												"src": "3836:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 100,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3836:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3818:45:0"
+									},
+									"returnParameters": {
+										"id": 105,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 104,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 106,
+												"src": "3887:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 103,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3887:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3886:9:0"
+									},
+									"scope": 131,
+									"src": "3802:94:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 107,
+										"nodeType": "StructuredDocumentation",
+										"src": "3904:130:0",
+										"text": "@dev Returns the last root hash of a group.\n @param groupId: Id of the group.\n @return Root hash of the group."
+									},
+									"functionSelector": "dabc4d51",
+									"id": 114,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getMerkleTreeRoot",
+									"nameLocation": "4049:17:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 110,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 109,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "4075:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 114,
+												"src": "4067:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 108,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4067:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4066:17:0"
+									},
+									"returnParameters": {
+										"id": 113,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 112,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 114,
+												"src": "4107:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 111,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4107:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4106:9:0"
+									},
+									"scope": 131,
+									"src": "4040:76:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 115,
+										"nodeType": "StructuredDocumentation",
+										"src": "4124:134:0",
+										"text": "@dev Returns the depth of the tree of a group.\n @param groupId: Id of the group.\n @return Depth of the group tree."
+									},
+									"functionSelector": "6389e107",
+									"id": 122,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getMerkleTreeDepth",
+									"nameLocation": "4273:18:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 118,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 117,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "4300:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 122,
+												"src": "4292:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 116,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4292:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4291:17:0"
+									},
+									"returnParameters": {
+										"id": 121,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 120,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 122,
+												"src": "4332:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 119,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4332:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4331:9:0"
+									},
+									"scope": 131,
+									"src": "4264:77:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 123,
+										"nodeType": "StructuredDocumentation",
+										"src": "4349:136:0",
+										"text": "@dev Returns the number of tree leaves of a group.\n @param groupId: Id of the group.\n @return Number of tree leaves."
+									},
+									"functionSelector": "7ee35a0c",
+									"id": 130,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getMerkleTreeSize",
+									"nameLocation": "4500:17:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 126,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 125,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "4526:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 130,
+												"src": "4518:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 124,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4518:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4517:17:0"
+									},
+									"returnParameters": {
+										"id": 129,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 128,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 130,
+												"src": "4558:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 127,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4558:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4557:9:0"
+									},
+									"scope": 131,
+									"src": "4491:76:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 132,
+							"src": "107:4463:0",
+							"usedErrors": [
+								4,
+								6,
+								8
+							],
+							"usedEvents": [
+								13,
+								22,
+								31,
+								42,
+								54,
+								67,
+								78
+							]
+						}
+					],
+					"src": "32:4538:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

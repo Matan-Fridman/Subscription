@@ -1,0 +1,2623 @@
+{
+	"id": "451de1e7b2b2a6f111a941171888640b",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"Semaphore/.git/objects/08/ISemaphore.sol": {
+				"content": "//SPDX-License-Identifier: MIT\r\npragma solidity 0.8.26;\r\n\r\n/// @title Semaphore contract interface.\r\ninterface ISemaphore {\r\n    error Semaphore__GroupHasNoMembers();\r\n    error Semaphore__MerkleTreeDepthIsNotSupported();\r\n    error Semaphore__MerkleTreeRootIsExpired();\r\n    error Semaphore__MerkleTreeRootIsNotPartOfTheGroup();\r\n    error Semaphore__YouAreUsingTheSameNullifierTwice();\r\n    error Semaphore__InvalidProof();\r\n\r\n    /// It defines all the group parameters used by Semaphore.sol.\r\n    struct Group {\r\n        uint256 merkleTreeDuration;\r\n        mapping(uint256 => uint256) merkleRootCreationDates;\r\n        mapping(uint256 => bool) nullifiers;\r\n    }\r\n\r\n    /// It defines all the Semaphore proof parameters used by Semaphore.sol.\r\n    struct SemaphoreProof {\r\n        uint256 merkleTreeDepth;\r\n        uint256 merkleTreeRoot;\r\n        uint256 nullifier;\r\n        uint256 message;\r\n        uint256 scope;\r\n        uint256[8] points;\r\n    }\r\n\r\n    /// @dev Event emitted when the Merkle tree duration of a group is updated.\r\n    /// @param groupId: Id of the group.\r\n    /// @param oldMerkleTreeDuration: Old Merkle tree duration of the group.\r\n    /// @param newMerkleTreeDuration: New Merkle tree duration of the group.\r\n    event GroupMerkleTreeDurationUpdated(\r\n        uint256 indexed groupId,\r\n        uint256 oldMerkleTreeDuration,\r\n        uint256 newMerkleTreeDuration\r\n    );\r\n\r\n    /// @dev Event emitted when a Semaphore proof is validated.\r\n    /// @param groupId: Id of the group.\r\n    /// @param merkleTreeDepth: Depth of the Merkle tree.\r\n    /// @param merkleTreeRoot: Root of the Merkle tree.\r\n    /// @param nullifier: Nullifier.\r\n    /// @param message: Semaphore message.\r\n    /// @param scope: Scope.\r\n    /// @param points: Zero-knowledge points.\r\n    event ProofValidated(\r\n        uint256 indexed groupId,\r\n        uint256 merkleTreeDepth,\r\n        uint256 indexed merkleTreeRoot,\r\n        uint256 nullifier,\r\n        uint256 message,\r\n        uint256 indexed scope,\r\n        uint256[8] points\r\n    );\r\n\r\n    /// @dev See {SemaphoreGroups-_createGroup}.\r\n    function createGroup() external returns (uint256);\r\n\r\n    /// @dev See {SemaphoreGroups-_createGroup}.\r\n    function createGroup(address admin) external returns (uint256);\r\n\r\n    /// @dev It creates a group with a custom Merkle tree duration.\r\n    /// @param admin: Admin of the group. It can be an Ethereum account or a smart contract.\r\n    /// @param merkleTreeDuration: Merkle tree duration.\r\n    /// @return Id of the group.\r\n    function createGroup(address admin, uint256 merkleTreeDuration) external returns (uint256);\r\n\r\n    /// @dev See {SemaphoreGroups-_updateGroupAdmin}.\r\n    function updateGroupAdmin(uint256 groupId, address newAdmin) external;\r\n\r\n    /// @dev See {SemaphoreGroups-_acceptGroupAdmin}.\r\n    function acceptGroupAdmin(uint256 groupId) external;\r\n\r\n    /// @dev Updates the group Merkle tree duration.\r\n    /// @param groupId: Id of the group.\r\n    /// @param newMerkleTreeDuration: New Merkle tree duration.\r\n    function updateGroupMerkleTreeDuration(uint256 groupId, uint256 newMerkleTreeDuration) external;\r\n\r\n    /// @dev See {SemaphoreGroups-_addMember}.\r\n    function addMember(uint256 groupId, uint256 identityCommitment) external;\r\n\r\n    /// @dev See {SemaphoreGroups-_addMembers}.\r\n    function addMembers(uint256 groupId, uint256[] calldata identityCommitments) external;\r\n\r\n    /// @dev See {SemaphoreGroups-_updateMember}.\r\n    function updateMember(\r\n        uint256 groupId,\r\n        uint256 oldIdentityCommitment,\r\n        uint256 newIdentityCommitment,\r\n        uint256[] calldata merkleProofSiblings\r\n    ) external;\r\n\r\n    /// @dev See {SemaphoreGroups-_removeMember}.\r\n    function removeMember(uint256 groupId, uint256 identityCommitment, uint256[] calldata merkleProofSiblings) external;\r\n\r\n    /// @dev Saves the nullifier hash to prevent double signaling and emits an event\r\n    /// if the zero-knowledge proof is valid.\r\n    /// @param groupId: Id of the group.\r\n    /// @param proof: Semaphore zero-knowledge proof.\r\n    function validateProof(uint256 groupId, SemaphoreProof calldata proof) external;\r\n\r\n    /// @dev Verifies a zero-knowledge proof by returning true or false.\r\n    /// @param groupId: Id of the group.\r\n    /// @param proof: Semaphore zero-knowledge proof.\r\n    function verifyProof(uint256 groupId, SemaphoreProof calldata proof) external view returns (bool);\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": [],
+			"evmVersion": "paris"
+		}
+	},
+	"output": {
+		"contracts": {
+			"Semaphore/.git/objects/08/ISemaphore.sol": {
+				"ISemaphore": {
+					"abi": [
+						{
+							"inputs": [],
+							"name": "Semaphore__GroupHasNoMembers",
+							"type": "error"
+						},
+						{
+							"inputs": [],
+							"name": "Semaphore__InvalidProof",
+							"type": "error"
+						},
+						{
+							"inputs": [],
+							"name": "Semaphore__MerkleTreeDepthIsNotSupported",
+							"type": "error"
+						},
+						{
+							"inputs": [],
+							"name": "Semaphore__MerkleTreeRootIsExpired",
+							"type": "error"
+						},
+						{
+							"inputs": [],
+							"name": "Semaphore__MerkleTreeRootIsNotPartOfTheGroup",
+							"type": "error"
+						},
+						{
+							"inputs": [],
+							"name": "Semaphore__YouAreUsingTheSameNullifierTwice",
+							"type": "error"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "oldMerkleTreeDuration",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "newMerkleTreeDuration",
+									"type": "uint256"
+								}
+							],
+							"name": "GroupMerkleTreeDurationUpdated",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "merkleTreeDepth",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "merkleTreeRoot",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "nullifier",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "message",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "scope",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256[8]",
+									"name": "points",
+									"type": "uint256[8]"
+								}
+							],
+							"name": "ProofValidated",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								}
+							],
+							"name": "acceptGroupAdmin",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "identityCommitment",
+									"type": "uint256"
+								}
+							],
+							"name": "addMember",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256[]",
+									"name": "identityCommitments",
+									"type": "uint256[]"
+								}
+							],
+							"name": "addMembers",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "admin",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "merkleTreeDuration",
+									"type": "uint256"
+								}
+							],
+							"name": "createGroup",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "createGroup",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "admin",
+									"type": "address"
+								}
+							],
+							"name": "createGroup",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "identityCommitment",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256[]",
+									"name": "merkleProofSiblings",
+									"type": "uint256[]"
+								}
+							],
+							"name": "removeMember",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "address",
+									"name": "newAdmin",
+									"type": "address"
+								}
+							],
+							"name": "updateGroupAdmin",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "newMerkleTreeDuration",
+									"type": "uint256"
+								}
+							],
+							"name": "updateGroupMerkleTreeDuration",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "oldIdentityCommitment",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "newIdentityCommitment",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256[]",
+									"name": "merkleProofSiblings",
+									"type": "uint256[]"
+								}
+							],
+							"name": "updateMember",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "merkleTreeDepth",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "merkleTreeRoot",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "nullifier",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "message",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "scope",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256[8]",
+											"name": "points",
+											"type": "uint256[8]"
+										}
+									],
+									"internalType": "struct ISemaphore.SemaphoreProof",
+									"name": "proof",
+									"type": "tuple"
+								}
+							],
+							"name": "validateProof",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "groupId",
+									"type": "uint256"
+								},
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "merkleTreeDepth",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "merkleTreeRoot",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "nullifier",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "message",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "scope",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256[8]",
+											"name": "points",
+											"type": "uint256[8]"
+										}
+									],
+									"internalType": "struct ISemaphore.SemaphoreProof",
+									"name": "proof",
+									"type": "tuple"
+								}
+							],
+							"name": "verifyProof",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"events": {
+							"GroupMerkleTreeDurationUpdated(uint256,uint256,uint256)": {
+								"details": "Event emitted when the Merkle tree duration of a group is updated.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"newMerkleTreeDuration": ": New Merkle tree duration of the group.",
+									"oldMerkleTreeDuration": ": Old Merkle tree duration of the group."
+								}
+							},
+							"ProofValidated(uint256,uint256,uint256,uint256,uint256,uint256,uint256[8])": {
+								"details": "Event emitted when a Semaphore proof is validated.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"merkleTreeDepth": ": Depth of the Merkle tree.",
+									"merkleTreeRoot": ": Root of the Merkle tree.",
+									"message": ": Semaphore message.",
+									"nullifier": ": Nullifier.",
+									"points": ": Zero-knowledge points.",
+									"scope": ": Scope."
+								}
+							}
+						},
+						"kind": "dev",
+						"methods": {
+							"acceptGroupAdmin(uint256)": {
+								"details": "See {SemaphoreGroups-_acceptGroupAdmin}."
+							},
+							"addMember(uint256,uint256)": {
+								"details": "See {SemaphoreGroups-_addMember}."
+							},
+							"addMembers(uint256,uint256[])": {
+								"details": "See {SemaphoreGroups-_addMembers}."
+							},
+							"createGroup()": {
+								"details": "See {SemaphoreGroups-_createGroup}."
+							},
+							"createGroup(address)": {
+								"details": "See {SemaphoreGroups-_createGroup}."
+							},
+							"createGroup(address,uint256)": {
+								"details": "It creates a group with a custom Merkle tree duration.",
+								"params": {
+									"admin": ": Admin of the group. It can be an Ethereum account or a smart contract.",
+									"merkleTreeDuration": ": Merkle tree duration."
+								},
+								"returns": {
+									"_0": "Id of the group."
+								}
+							},
+							"removeMember(uint256,uint256,uint256[])": {
+								"details": "See {SemaphoreGroups-_removeMember}."
+							},
+							"updateGroupAdmin(uint256,address)": {
+								"details": "See {SemaphoreGroups-_updateGroupAdmin}."
+							},
+							"updateGroupMerkleTreeDuration(uint256,uint256)": {
+								"details": "Updates the group Merkle tree duration.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"newMerkleTreeDuration": ": New Merkle tree duration."
+								}
+							},
+							"updateMember(uint256,uint256,uint256,uint256[])": {
+								"details": "See {SemaphoreGroups-_updateMember}."
+							},
+							"validateProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))": {
+								"details": "Saves the nullifier hash to prevent double signaling and emits an event if the zero-knowledge proof is valid.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"proof": ": Semaphore zero-knowledge proof."
+								}
+							},
+							"verifyProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))": {
+								"details": "Verifies a zero-knowledge proof by returning true or false.",
+								"params": {
+									"groupId": ": Id of the group.",
+									"proof": ": Semaphore zero-knowledge proof."
+								}
+							}
+						},
+						"title": "Semaphore contract interface.",
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"acceptGroupAdmin(uint256)": "da3cda52",
+							"addMember(uint256,uint256)": "1783efc3",
+							"addMembers(uint256,uint256[])": "04245371",
+							"createGroup()": "575185ed",
+							"createGroup(address)": "5c3f3b60",
+							"createGroup(address,uint256)": "2c880363",
+							"removeMember(uint256,uint256,uint256[])": "6cdd32fe",
+							"updateGroupAdmin(uint256,address)": "568ee826",
+							"updateGroupMerkleTreeDuration(uint256,uint256)": "fcf0b6ec",
+							"updateMember(uint256,uint256,uint256,uint256[])": "4178c4d5",
+							"validateProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))": "d0d898dd",
+							"verifyProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))": "456f4188"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.26+commit.8a97fa7a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"Semaphore__GroupHasNoMembers\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Semaphore__InvalidProof\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Semaphore__MerkleTreeDepthIsNotSupported\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Semaphore__MerkleTreeRootIsExpired\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Semaphore__MerkleTreeRootIsNotPartOfTheGroup\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Semaphore__YouAreUsingTheSameNullifierTwice\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldMerkleTreeDuration\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newMerkleTreeDuration\",\"type\":\"uint256\"}],\"name\":\"GroupMerkleTreeDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"merkleTreeDepth\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"merkleTreeRoot\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nullifier\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"message\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"scope\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256[8]\",\"name\":\"points\",\"type\":\"uint256[8]\"}],\"name\":\"ProofValidated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"}],\"name\":\"acceptGroupAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"identityCommitment\",\"type\":\"uint256\"}],\"name\":\"addMember\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256[]\",\"name\":\"identityCommitments\",\"type\":\"uint256[]\"}],\"name\":\"addMembers\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"merkleTreeDuration\",\"type\":\"uint256\"}],\"name\":\"createGroup\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"createGroup\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"name\":\"createGroup\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"identityCommitment\",\"type\":\"uint256\"},{\"internalType\":\"uint256[]\",\"name\":\"merkleProofSiblings\",\"type\":\"uint256[]\"}],\"name\":\"removeMember\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"updateGroupAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"newMerkleTreeDuration\",\"type\":\"uint256\"}],\"name\":\"updateGroupMerkleTreeDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"oldIdentityCommitment\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"newIdentityCommitment\",\"type\":\"uint256\"},{\"internalType\":\"uint256[]\",\"name\":\"merkleProofSiblings\",\"type\":\"uint256[]\"}],\"name\":\"updateMember\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"merkleTreeDepth\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"merkleTreeRoot\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nullifier\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"message\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"scope\",\"type\":\"uint256\"},{\"internalType\":\"uint256[8]\",\"name\":\"points\",\"type\":\"uint256[8]\"}],\"internalType\":\"struct ISemaphore.SemaphoreProof\",\"name\":\"proof\",\"type\":\"tuple\"}],\"name\":\"validateProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"merkleTreeDepth\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"merkleTreeRoot\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nullifier\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"message\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"scope\",\"type\":\"uint256\"},{\"internalType\":\"uint256[8]\",\"name\":\"points\",\"type\":\"uint256[8]\"}],\"internalType\":\"struct ISemaphore.SemaphoreProof\",\"name\":\"proof\",\"type\":\"tuple\"}],\"name\":\"verifyProof\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"GroupMerkleTreeDurationUpdated(uint256,uint256,uint256)\":{\"details\":\"Event emitted when the Merkle tree duration of a group is updated.\",\"params\":{\"groupId\":\": Id of the group.\",\"newMerkleTreeDuration\":\": New Merkle tree duration of the group.\",\"oldMerkleTreeDuration\":\": Old Merkle tree duration of the group.\"}},\"ProofValidated(uint256,uint256,uint256,uint256,uint256,uint256,uint256[8])\":{\"details\":\"Event emitted when a Semaphore proof is validated.\",\"params\":{\"groupId\":\": Id of the group.\",\"merkleTreeDepth\":\": Depth of the Merkle tree.\",\"merkleTreeRoot\":\": Root of the Merkle tree.\",\"message\":\": Semaphore message.\",\"nullifier\":\": Nullifier.\",\"points\":\": Zero-knowledge points.\",\"scope\":\": Scope.\"}}},\"kind\":\"dev\",\"methods\":{\"acceptGroupAdmin(uint256)\":{\"details\":\"See {SemaphoreGroups-_acceptGroupAdmin}.\"},\"addMember(uint256,uint256)\":{\"details\":\"See {SemaphoreGroups-_addMember}.\"},\"addMembers(uint256,uint256[])\":{\"details\":\"See {SemaphoreGroups-_addMembers}.\"},\"createGroup()\":{\"details\":\"See {SemaphoreGroups-_createGroup}.\"},\"createGroup(address)\":{\"details\":\"See {SemaphoreGroups-_createGroup}.\"},\"createGroup(address,uint256)\":{\"details\":\"It creates a group with a custom Merkle tree duration.\",\"params\":{\"admin\":\": Admin of the group. It can be an Ethereum account or a smart contract.\",\"merkleTreeDuration\":\": Merkle tree duration.\"},\"returns\":{\"_0\":\"Id of the group.\"}},\"removeMember(uint256,uint256,uint256[])\":{\"details\":\"See {SemaphoreGroups-_removeMember}.\"},\"updateGroupAdmin(uint256,address)\":{\"details\":\"See {SemaphoreGroups-_updateGroupAdmin}.\"},\"updateGroupMerkleTreeDuration(uint256,uint256)\":{\"details\":\"Updates the group Merkle tree duration.\",\"params\":{\"groupId\":\": Id of the group.\",\"newMerkleTreeDuration\":\": New Merkle tree duration.\"}},\"updateMember(uint256,uint256,uint256,uint256[])\":{\"details\":\"See {SemaphoreGroups-_updateMember}.\"},\"validateProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))\":{\"details\":\"Saves the nullifier hash to prevent double signaling and emits an event if the zero-knowledge proof is valid.\",\"params\":{\"groupId\":\": Id of the group.\",\"proof\":\": Semaphore zero-knowledge proof.\"}},\"verifyProof(uint256,(uint256,uint256,uint256,uint256,uint256,uint256[8]))\":{\"details\":\"Verifies a zero-knowledge proof by returning true or false.\",\"params\":{\"groupId\":\": Id of the group.\",\"proof\":\": Semaphore zero-knowledge proof.\"}}},\"title\":\"Semaphore contract interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"Semaphore/.git/objects/08/ISemaphore.sol\":\"ISemaphore\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"Semaphore/.git/objects/08/ISemaphore.sol\":{\"keccak256\":\"0x2f5ddb7f5c1deb3bf32338048bd2df052136774da756a2a67743dbf24aa2371a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ca2d36bcb5e3301642ef214cdd8db3360254c11e77ccaa1267dd566177e7038b\",\"dweb:/ipfs/QmSvCNyM1mJfZevWFyDQxAvcE87JWF2Z2pz6ak27GRdgzQ\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"Semaphore/.git/objects/08/ISemaphore.sol": {
+				"ast": {
+					"absolutePath": "Semaphore/.git/objects/08/ISemaphore.sol",
+					"exportedSymbols": {
+						"ISemaphore": [
+							178
+						]
+					},
+					"id": 179,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"0.8",
+								".26"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "32:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "ISemaphore",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"documentation": {
+								"id": 2,
+								"nodeType": "StructuredDocumentation",
+								"src": "59:42:0",
+								"text": "@title Semaphore contract interface."
+							},
+							"fullyImplemented": false,
+							"id": 178,
+							"linearizedBaseContracts": [
+								178
+							],
+							"name": "ISemaphore",
+							"nameLocation": "111:10:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"errorSelector": "c8b02e01",
+									"id": 4,
+									"name": "Semaphore__GroupHasNoMembers",
+									"nameLocation": "135:28:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 3,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "163:2:0"
+									},
+									"src": "129:37:0"
+								},
+								{
+									"errorSelector": "ecf64f12",
+									"id": 6,
+									"name": "Semaphore__MerkleTreeDepthIsNotSupported",
+									"nameLocation": "178:40:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 5,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "218:2:0"
+									},
+									"src": "172:49:0"
+								},
+								{
+									"errorSelector": "9581a990",
+									"id": 8,
+									"name": "Semaphore__MerkleTreeRootIsExpired",
+									"nameLocation": "233:34:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 7,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "267:2:0"
+									},
+									"src": "227:43:0"
+								},
+								{
+									"errorSelector": "4d329586",
+									"id": 10,
+									"name": "Semaphore__MerkleTreeRootIsNotPartOfTheGroup",
+									"nameLocation": "282:44:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 9,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "326:2:0"
+									},
+									"src": "276:53:0"
+								},
+								{
+									"errorSelector": "208b15e8",
+									"id": 12,
+									"name": "Semaphore__YouAreUsingTheSameNullifierTwice",
+									"nameLocation": "341:43:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 11,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "384:2:0"
+									},
+									"src": "335:52:0"
+								},
+								{
+									"errorSelector": "4aa6bc40",
+									"id": 14,
+									"name": "Semaphore__InvalidProof",
+									"nameLocation": "399:23:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 13,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "422:2:0"
+									},
+									"src": "393:32:0"
+								},
+								{
+									"canonicalName": "ISemaphore.Group",
+									"documentation": {
+										"id": 15,
+										"nodeType": "StructuredDocumentation",
+										"src": "433:62:0",
+										"text": "It defines all the group parameters used by Semaphore.sol."
+									},
+									"id": 26,
+									"members": [
+										{
+											"constant": false,
+											"id": 17,
+											"mutability": "mutable",
+											"name": "merkleTreeDuration",
+											"nameLocation": "533:18:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 26,
+											"src": "525:26:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 16,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "525:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 21,
+											"mutability": "mutable",
+											"name": "merkleRootCreationDates",
+											"nameLocation": "590:23:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 26,
+											"src": "562:51:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+												"typeString": "mapping(uint256 => uint256)"
+											},
+											"typeName": {
+												"id": 20,
+												"keyName": "",
+												"keyNameLocation": "-1:-1:-1",
+												"keyType": {
+													"id": 18,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "570:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"nodeType": "Mapping",
+												"src": "562:27:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+													"typeString": "mapping(uint256 => uint256)"
+												},
+												"valueName": "",
+												"valueNameLocation": "-1:-1:-1",
+												"valueType": {
+													"id": 19,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "581:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 25,
+											"mutability": "mutable",
+											"name": "nullifiers",
+											"nameLocation": "649:10:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 26,
+											"src": "624:35:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_mapping$_t_uint256_$_t_bool_$",
+												"typeString": "mapping(uint256 => bool)"
+											},
+											"typeName": {
+												"id": 24,
+												"keyName": "",
+												"keyNameLocation": "-1:-1:-1",
+												"keyType": {
+													"id": 22,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "632:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"nodeType": "Mapping",
+												"src": "624:24:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_mapping$_t_uint256_$_t_bool_$",
+													"typeString": "mapping(uint256 => bool)"
+												},
+												"valueName": "",
+												"valueNameLocation": "-1:-1:-1",
+												"valueType": {
+													"id": 23,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "643:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "Group",
+									"nameLocation": "508:5:0",
+									"nodeType": "StructDefinition",
+									"scope": 178,
+									"src": "501:166:0",
+									"visibility": "public"
+								},
+								{
+									"canonicalName": "ISemaphore.SemaphoreProof",
+									"documentation": {
+										"id": 27,
+										"nodeType": "StructuredDocumentation",
+										"src": "675:72:0",
+										"text": "It defines all the Semaphore proof parameters used by Semaphore.sol."
+									},
+									"id": 42,
+									"members": [
+										{
+											"constant": false,
+											"id": 29,
+											"mutability": "mutable",
+											"name": "merkleTreeDepth",
+											"nameLocation": "794:15:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 42,
+											"src": "786:23:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 28,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "786:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 31,
+											"mutability": "mutable",
+											"name": "merkleTreeRoot",
+											"nameLocation": "828:14:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 42,
+											"src": "820:22:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 30,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "820:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 33,
+											"mutability": "mutable",
+											"name": "nullifier",
+											"nameLocation": "861:9:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 42,
+											"src": "853:17:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 32,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "853:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 35,
+											"mutability": "mutable",
+											"name": "message",
+											"nameLocation": "889:7:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 42,
+											"src": "881:15:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 34,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "881:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 37,
+											"mutability": "mutable",
+											"name": "scope",
+											"nameLocation": "915:5:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 42,
+											"src": "907:13:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 36,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "907:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 41,
+											"mutability": "mutable",
+											"name": "points",
+											"nameLocation": "942:6:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 42,
+											"src": "931:17:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_array$_t_uint256_$8_storage_ptr",
+												"typeString": "uint256[8]"
+											},
+											"typeName": {
+												"baseType": {
+													"id": 38,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "931:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"id": 40,
+												"length": {
+													"hexValue": "38",
+													"id": 39,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": true,
+													"kind": "number",
+													"lValueRequested": false,
+													"nodeType": "Literal",
+													"src": "939:1:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_rational_8_by_1",
+														"typeString": "int_const 8"
+													},
+													"value": "8"
+												},
+												"nodeType": "ArrayTypeName",
+												"src": "931:10:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$8_storage_ptr",
+													"typeString": "uint256[8]"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "SemaphoreProof",
+									"nameLocation": "760:14:0",
+									"nodeType": "StructDefinition",
+									"scope": 178,
+									"src": "753:203:0",
+									"visibility": "public"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 43,
+										"nodeType": "StructuredDocumentation",
+										"src": "964:273:0",
+										"text": "@dev Event emitted when the Merkle tree duration of a group is updated.\n @param groupId: Id of the group.\n @param oldMerkleTreeDuration: Old Merkle tree duration of the group.\n @param newMerkleTreeDuration: New Merkle tree duration of the group."
+									},
+									"eventSelector": "264b2a8f6763c084235fe832ba903482b2ef1a521336881fc75b987c2dfd29c5",
+									"id": 51,
+									"name": "GroupMerkleTreeDurationUpdated",
+									"nameLocation": "1249:30:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 50,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 45,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "1306:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 51,
+												"src": "1290:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 44,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1290:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 47,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "oldMerkleTreeDuration",
+												"nameLocation": "1332:21:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 51,
+												"src": "1324:29:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 46,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1324:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 49,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "newMerkleTreeDuration",
+												"nameLocation": "1372:21:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 51,
+												"src": "1364:29:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 48,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1364:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1279:121:0"
+									},
+									"src": "1243:158:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 52,
+										"nodeType": "StructuredDocumentation",
+										"src": "1409:376:0",
+										"text": "@dev Event emitted when a Semaphore proof is validated.\n @param groupId: Id of the group.\n @param merkleTreeDepth: Depth of the Merkle tree.\n @param merkleTreeRoot: Root of the Merkle tree.\n @param nullifier: Nullifier.\n @param message: Semaphore message.\n @param scope: Scope.\n @param points: Zero-knowledge points."
+									},
+									"eventSelector": "0c32e14cfe81a05d371c248d22de6b7ae849e981b76a1f8842e7b6da73fc405a",
+									"id": 70,
+									"name": "ProofValidated",
+									"nameLocation": "1797:14:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 69,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 54,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "1838:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 70,
+												"src": "1822:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 53,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1822:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 56,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "merkleTreeDepth",
+												"nameLocation": "1864:15:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 70,
+												"src": "1856:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 55,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1856:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 58,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "merkleTreeRoot",
+												"nameLocation": "1906:14:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 70,
+												"src": "1890:30:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 57,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1890:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 60,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "nullifier",
+												"nameLocation": "1939:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 70,
+												"src": "1931:17:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 59,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1931:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 62,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "message",
+												"nameLocation": "1967:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 70,
+												"src": "1959:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 61,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1959:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 64,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "scope",
+												"nameLocation": "2001:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 70,
+												"src": "1985:21:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 63,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1985:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 68,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "points",
+												"nameLocation": "2028:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 70,
+												"src": "2017:17:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$8_memory_ptr",
+													"typeString": "uint256[8]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 65,
+														"name": "uint256",
+														"nodeType": "ElementaryTypeName",
+														"src": "2017:7:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 67,
+													"length": {
+														"hexValue": "38",
+														"id": 66,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "2025:1:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_8_by_1",
+															"typeString": "int_const 8"
+														},
+														"value": "8"
+													},
+													"nodeType": "ArrayTypeName",
+													"src": "2017:10:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$8_storage_ptr",
+														"typeString": "uint256[8]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1811:230:0"
+									},
+									"src": "1791:251:0"
+								},
+								{
+									"documentation": {
+										"id": 71,
+										"nodeType": "StructuredDocumentation",
+										"src": "2050:44:0",
+										"text": "@dev See {SemaphoreGroups-_createGroup}."
+									},
+									"functionSelector": "575185ed",
+									"id": 76,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "createGroup",
+									"nameLocation": "2109:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 72,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "2120:2:0"
+									},
+									"returnParameters": {
+										"id": 75,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 74,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "2141:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 73,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2141:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2140:9:0"
+									},
+									"scope": 178,
+									"src": "2100:50:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 77,
+										"nodeType": "StructuredDocumentation",
+										"src": "2158:44:0",
+										"text": "@dev See {SemaphoreGroups-_createGroup}."
+									},
+									"functionSelector": "5c3f3b60",
+									"id": 84,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "createGroup",
+									"nameLocation": "2217:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 80,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 79,
+												"mutability": "mutable",
+												"name": "admin",
+												"nameLocation": "2237:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 84,
+												"src": "2229:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 78,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "2229:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2228:15:0"
+									},
+									"returnParameters": {
+										"id": 83,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 82,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 84,
+												"src": "2262:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 81,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2262:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2261:9:0"
+									},
+									"scope": 178,
+									"src": "2208:63:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 85,
+										"nodeType": "StructuredDocumentation",
+										"src": "2279:249:0",
+										"text": "@dev It creates a group with a custom Merkle tree duration.\n @param admin: Admin of the group. It can be an Ethereum account or a smart contract.\n @param merkleTreeDuration: Merkle tree duration.\n @return Id of the group."
+									},
+									"functionSelector": "2c880363",
+									"id": 94,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "createGroup",
+									"nameLocation": "2543:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 90,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 87,
+												"mutability": "mutable",
+												"name": "admin",
+												"nameLocation": "2563:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 94,
+												"src": "2555:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 86,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "2555:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 89,
+												"mutability": "mutable",
+												"name": "merkleTreeDuration",
+												"nameLocation": "2578:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 94,
+												"src": "2570:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 88,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2570:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2554:43:0"
+									},
+									"returnParameters": {
+										"id": 93,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 92,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 94,
+												"src": "2616:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 91,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2616:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2615:9:0"
+									},
+									"scope": 178,
+									"src": "2534:91:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 95,
+										"nodeType": "StructuredDocumentation",
+										"src": "2633:49:0",
+										"text": "@dev See {SemaphoreGroups-_updateGroupAdmin}."
+									},
+									"functionSelector": "568ee826",
+									"id": 102,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "updateGroupAdmin",
+									"nameLocation": "2697:16:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 100,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 97,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "2722:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 102,
+												"src": "2714:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 96,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2714:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 99,
+												"mutability": "mutable",
+												"name": "newAdmin",
+												"nameLocation": "2739:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 102,
+												"src": "2731:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 98,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "2731:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2713:35:0"
+									},
+									"returnParameters": {
+										"id": 101,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "2757:0:0"
+									},
+									"scope": 178,
+									"src": "2688:70:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 103,
+										"nodeType": "StructuredDocumentation",
+										"src": "2766:49:0",
+										"text": "@dev See {SemaphoreGroups-_acceptGroupAdmin}."
+									},
+									"functionSelector": "da3cda52",
+									"id": 108,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "acceptGroupAdmin",
+									"nameLocation": "2830:16:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 106,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 105,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "2855:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 108,
+												"src": "2847:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 104,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2847:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2846:17:0"
+									},
+									"returnParameters": {
+										"id": 107,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "2872:0:0"
+									},
+									"scope": 178,
+									"src": "2821:52:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 109,
+										"nodeType": "StructuredDocumentation",
+										"src": "2881:155:0",
+										"text": "@dev Updates the group Merkle tree duration.\n @param groupId: Id of the group.\n @param newMerkleTreeDuration: New Merkle tree duration."
+									},
+									"functionSelector": "fcf0b6ec",
+									"id": 116,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "updateGroupMerkleTreeDuration",
+									"nameLocation": "3051:29:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 114,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 111,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3089:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 116,
+												"src": "3081:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 110,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3081:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 113,
+												"mutability": "mutable",
+												"name": "newMerkleTreeDuration",
+												"nameLocation": "3106:21:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 116,
+												"src": "3098:29:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 112,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3098:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3080:48:0"
+									},
+									"returnParameters": {
+										"id": 115,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "3137:0:0"
+									},
+									"scope": 178,
+									"src": "3042:96:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 117,
+										"nodeType": "StructuredDocumentation",
+										"src": "3146:42:0",
+										"text": "@dev See {SemaphoreGroups-_addMember}."
+									},
+									"functionSelector": "1783efc3",
+									"id": 124,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "addMember",
+									"nameLocation": "3203:9:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 122,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 119,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3221:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 124,
+												"src": "3213:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 118,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3213:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 121,
+												"mutability": "mutable",
+												"name": "identityCommitment",
+												"nameLocation": "3238:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 124,
+												"src": "3230:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 120,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3230:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3212:45:0"
+									},
+									"returnParameters": {
+										"id": 123,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "3266:0:0"
+									},
+									"scope": 178,
+									"src": "3194:73:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 125,
+										"nodeType": "StructuredDocumentation",
+										"src": "3275:43:0",
+										"text": "@dev See {SemaphoreGroups-_addMembers}."
+									},
+									"functionSelector": "04245371",
+									"id": 133,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "addMembers",
+									"nameLocation": "3333:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 131,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 127,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3352:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 133,
+												"src": "3344:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 126,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3344:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 130,
+												"mutability": "mutable",
+												"name": "identityCommitments",
+												"nameLocation": "3380:19:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 133,
+												"src": "3361:38:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$dyn_calldata_ptr",
+													"typeString": "uint256[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 128,
+														"name": "uint256",
+														"nodeType": "ElementaryTypeName",
+														"src": "3361:7:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 129,
+													"nodeType": "ArrayTypeName",
+													"src": "3361:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+														"typeString": "uint256[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3343:57:0"
+									},
+									"returnParameters": {
+										"id": 132,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "3409:0:0"
+									},
+									"scope": 178,
+									"src": "3324:86:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 134,
+										"nodeType": "StructuredDocumentation",
+										"src": "3418:45:0",
+										"text": "@dev See {SemaphoreGroups-_updateMember}."
+									},
+									"functionSelector": "4178c4d5",
+									"id": 146,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "updateMember",
+									"nameLocation": "3478:12:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 144,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 136,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3509:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 146,
+												"src": "3501:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 135,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3501:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 138,
+												"mutability": "mutable",
+												"name": "oldIdentityCommitment",
+												"nameLocation": "3535:21:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 146,
+												"src": "3527:29:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 137,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3527:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 140,
+												"mutability": "mutable",
+												"name": "newIdentityCommitment",
+												"nameLocation": "3575:21:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 146,
+												"src": "3567:29:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 139,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3567:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 143,
+												"mutability": "mutable",
+												"name": "merkleProofSiblings",
+												"nameLocation": "3626:19:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 146,
+												"src": "3607:38:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$dyn_calldata_ptr",
+													"typeString": "uint256[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 141,
+														"name": "uint256",
+														"nodeType": "ElementaryTypeName",
+														"src": "3607:7:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 142,
+													"nodeType": "ArrayTypeName",
+													"src": "3607:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+														"typeString": "uint256[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3490:162:0"
+									},
+									"returnParameters": {
+										"id": 145,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "3661:0:0"
+									},
+									"scope": 178,
+									"src": "3469:193:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 147,
+										"nodeType": "StructuredDocumentation",
+										"src": "3670:45:0",
+										"text": "@dev See {SemaphoreGroups-_removeMember}."
+									},
+									"functionSelector": "6cdd32fe",
+									"id": 157,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "removeMember",
+									"nameLocation": "3730:12:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 155,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 149,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "3751:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 157,
+												"src": "3743:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 148,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3743:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 151,
+												"mutability": "mutable",
+												"name": "identityCommitment",
+												"nameLocation": "3768:18:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 157,
+												"src": "3760:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 150,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3760:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 154,
+												"mutability": "mutable",
+												"name": "merkleProofSiblings",
+												"nameLocation": "3807:19:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 157,
+												"src": "3788:38:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_uint256_$dyn_calldata_ptr",
+													"typeString": "uint256[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 152,
+														"name": "uint256",
+														"nodeType": "ElementaryTypeName",
+														"src": "3788:7:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"id": 153,
+													"nodeType": "ArrayTypeName",
+													"src": "3788:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+														"typeString": "uint256[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3742:85:0"
+									},
+									"returnParameters": {
+										"id": 156,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "3836:0:0"
+									},
+									"scope": 178,
+									"src": "3721:116:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 158,
+										"nodeType": "StructuredDocumentation",
+										"src": "3845:224:0",
+										"text": "@dev Saves the nullifier hash to prevent double signaling and emits an event\n if the zero-knowledge proof is valid.\n @param groupId: Id of the group.\n @param proof: Semaphore zero-knowledge proof."
+									},
+									"functionSelector": "d0d898dd",
+									"id": 166,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "validateProof",
+									"nameLocation": "4084:13:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 164,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 160,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "4106:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 166,
+												"src": "4098:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 159,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4098:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 163,
+												"mutability": "mutable",
+												"name": "proof",
+												"nameLocation": "4139:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 166,
+												"src": "4115:29:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_SemaphoreProof_$42_calldata_ptr",
+													"typeString": "struct ISemaphore.SemaphoreProof"
+												},
+												"typeName": {
+													"id": 162,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 161,
+														"name": "SemaphoreProof",
+														"nameLocations": [
+															"4115:14:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 42,
+														"src": "4115:14:0"
+													},
+													"referencedDeclaration": 42,
+													"src": "4115:14:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_SemaphoreProof_$42_storage_ptr",
+														"typeString": "struct ISemaphore.SemaphoreProof"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4097:48:0"
+									},
+									"returnParameters": {
+										"id": 165,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "4154:0:0"
+									},
+									"scope": 178,
+									"src": "4075:80:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 167,
+										"nodeType": "StructuredDocumentation",
+										"src": "4163:165:0",
+										"text": "@dev Verifies a zero-knowledge proof by returning true or false.\n @param groupId: Id of the group.\n @param proof: Semaphore zero-knowledge proof."
+									},
+									"functionSelector": "456f4188",
+									"id": 177,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "verifyProof",
+									"nameLocation": "4343:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 173,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 169,
+												"mutability": "mutable",
+												"name": "groupId",
+												"nameLocation": "4363:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 177,
+												"src": "4355:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 168,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4355:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 172,
+												"mutability": "mutable",
+												"name": "proof",
+												"nameLocation": "4396:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 177,
+												"src": "4372:29:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_SemaphoreProof_$42_calldata_ptr",
+													"typeString": "struct ISemaphore.SemaphoreProof"
+												},
+												"typeName": {
+													"id": 171,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 170,
+														"name": "SemaphoreProof",
+														"nameLocations": [
+															"4372:14:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 42,
+														"src": "4372:14:0"
+													},
+													"referencedDeclaration": 42,
+													"src": "4372:14:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_SemaphoreProof_$42_storage_ptr",
+														"typeString": "struct ISemaphore.SemaphoreProof"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4354:48:0"
+									},
+									"returnParameters": {
+										"id": 176,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 175,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 177,
+												"src": "4426:4:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												},
+												"typeName": {
+													"id": 174,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "4426:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4425:6:0"
+									},
+									"scope": 178,
+									"src": "4334:98:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 179,
+							"src": "101:4334:0",
+							"usedErrors": [
+								4,
+								6,
+								8,
+								10,
+								12,
+								14
+							],
+							"usedEvents": [
+								51,
+								70
+							]
+						}
+					],
+					"src": "32:4403:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
